@@ -20,13 +20,13 @@ while True:
     mask_red = cv2.bitwise_or(mask_red1, mask_red2)
 
     # lower and upper bounds for green color
-    lower_green = np.array([36, 25, 25])
-    upper_green = np.array([70, 255,255])
+    lower_green = np.array([50, 0, 50])
+    upper_green = np.array([255,180,255])
     mask_green = cv2.inRange(hsv, lower_green, upper_green)
 
     # lower and upper bounds for blue color
-    lower_blue = np.array([90, 50, 50])
-    upper_blue = np.array([130, 255, 255])
+    lower_blue = np.array([50, 50, 0])
+    upper_blue = np.array([255, 255, 180])
     mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
 
     mask = cv2.bitwise_or(mask_red, cv2.bitwise_or(mask_green, mask_blue))
