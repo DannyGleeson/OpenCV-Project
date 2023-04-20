@@ -25,8 +25,8 @@ while True:
     mask_green = cv2.inRange(hsv, lower_green, upper_green)
 
     # lower and upper bounds for blue color
-    lower_blue = np.array([110, 50, 50])
-    upper_blue = np.array([130,255,255])
+    lower_blue = np.array([50, 0, 50])
+    upper_blue = np.array([255,180,255])
     mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
 
     mask = cv2.bitwise_or(mask_red, cv2.bitwise_or(mask_green, mask_blue))
