@@ -4,9 +4,35 @@ import pyfirmata
 
 # Define board and pins connected to the stepper motor
 board = pyfirmata.Arduino('/dev/ttyACM0')
-stepsPerRevolution = 200
-motorPins = [8, 9, 10, 11]
+motor_pins = [8, 9, 10, 11]
 delay_time = 0.005
+steps_per_revolution = 200
+motor_speed = 60
+
+# Initialize the stepper motor
+motor = pyfirmata.util.StepperMotor(board, motor_pins[0], motor_pins[1], motor_pins[2], motor_pins[3], steps_per_revolution)
+
+# Start the board
+board.digital[13].write(1)
+board.iterate()
+
+# Rotate the stepper motor one full revolution clockwise
+motor.setSpeed(motor_speed)
+motor.step(steps_per_revolution)
+
+# Wait for 1 second
+time.sleep(1)
+
+# Rotate the stepper motor one full revolution counterclockwise
+motor.setSpeed(motor_speed)
+motor.step(-steps_per_revolution)
+
+# Wait for 1 second
+time.sleep(1)
+
+# Stop the board
+board.digital[13].write(0)
+board.iterate()
 
 for pin in motorPins:
     board.digital[pin].mode = pyfirmata.OUTPUT
